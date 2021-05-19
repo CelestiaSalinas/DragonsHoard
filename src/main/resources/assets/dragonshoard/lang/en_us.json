@@ -4,5 +4,9 @@
   "item.dragonshoard.white_gold_ingot": "White Gold Ingot",
   "item.dragonshoard.blue_gold_ingot": "Blue Gold Ingot",
   "item.dragonshoard.star_blue_gold_ingot": "Star Blue Gold Ingot",
-  "block.dragonshoard.rose_gold_block": "Rose Gold Block"
+  "block.dragonshoard.rose_gold_block": "Rose Gold Block",
+  "block.dragonshoard.white_gold_block": "White Gold Block",
+  "block.dragonshoard.blue_gold_block": "Blue Gold Block",
+  "block.dragonshoard.star_blue_gold_block": "Star Blue Gold Block",
+  "block.dragonshoard.silver_block": "Silver Block"
 }
