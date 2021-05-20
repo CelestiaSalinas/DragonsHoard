@@ -1,0 +1,6 @@
+{
+  "parent": "dragonshoard:block/star_blue_gold_block_side",
+  "textures": {
+    "all": "dragonshoard:block/star_blue_gold_block_2"
+  }
+}
