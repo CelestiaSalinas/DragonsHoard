@@ -1,4 +1,4 @@
-package com.celestiasalinas.dragonshoard.core.registry;
+package com.celestiasalinas.dragonshoard.core.registry.items;
 
 import com.celestiasalinas.dragonshoard.core.DragonsHoard;
 import net.minecraft.item.Item;
