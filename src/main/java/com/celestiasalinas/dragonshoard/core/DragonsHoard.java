@@ -40,10 +40,9 @@ public class DragonsHoard
         // ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Configuration.server_config);
         // ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Configuration.client_config);
 
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        DHItems.ITEMS.register(bus);
-        DHBlocks.BLOCKS.register(bus);
+        DHItems.ITEMS.register(modEventBus);
+        DHBlocks.BLOCKS.register(modEventBus);
 
         ParticleRegistry.PARTICLES.register(modEventBus);
 
