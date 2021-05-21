@@ -1,9 +1,6 @@
 {
-  "parent": "block/orientable",
+  "parent": "block/cube_all",
   "textures": {
-    "side": "dragonshoard:block/rose_gold_block",
-    "front": "dragonshoard:block/rose_gold_block",
-    "top": "dragonshoard:block/rose_gold_block_top",
-    "bottom": "dragonshoard:block/rose_gold_block_top"
+    "all": "dragonshoard:block/rose_gold_block"
   }
 }

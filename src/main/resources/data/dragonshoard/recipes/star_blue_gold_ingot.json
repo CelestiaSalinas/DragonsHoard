@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "",
+  "ingredients": [
+    {
+      "item": "dragonshoard:star_blue_gold_block"
+    }
+  ],
+  "result": {
+    "item": "dragonshoard:star_blue_gold_ingot",
+    "count": 9
+  }
+}

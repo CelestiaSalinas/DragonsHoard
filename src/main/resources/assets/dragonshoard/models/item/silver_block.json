@@ -1,3 +1,6 @@
 {
-  "parent": "dragonshoard:silver_block"
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "dragonshoard:block/silver_block"
+  }
 }

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "dragonshoard:rose_gold_ingot"
+    }
+  },
+  "result": {
+    "item": "dragonshoard:rose_gold_block"
+  }
+
+}
+

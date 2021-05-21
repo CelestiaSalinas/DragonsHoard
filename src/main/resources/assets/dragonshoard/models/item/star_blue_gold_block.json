@@ -1,3 +1,9 @@
 {
-  "parent": "dragonshoard:star_blue_gold_block"
+  "parent": "block/orientable",
+  "textures": {
+    "side": "dragonshoard:block/star_blue_gold_block_1",
+    "front": "dragonshoard:block/star_blue_gold_block_2",
+    "top": "dragonshoard:block/star_blue_gold_block_3",
+    "bottom": "dragonshoard:block/star_blue_gold_block_2"
+  }
 }

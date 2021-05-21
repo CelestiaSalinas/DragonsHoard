@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "",
+  "ingredients": [
+    {
+      "item": "dragonshoard:white_gold_block"
+    }
+  ],
+  "result": {
+    "item": "dragonshoard:white_gold_ingot",
+    "count": 9
+  }
+}
