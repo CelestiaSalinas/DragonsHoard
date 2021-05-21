@@ -1,8 +1,6 @@
 {
   "parent": "block/orientable",
-  "ambientocclusion": false,
   "textures": {
-    "particle": "dragonshoard:particle/glitter",
     "side": "dragonshoard:block/star_blue_gold_block_1",
     "front": "dragonshoard:block/star_blue_gold_block_2",
     "top": "dragonshoard:block/star_blue_gold_block_3",
