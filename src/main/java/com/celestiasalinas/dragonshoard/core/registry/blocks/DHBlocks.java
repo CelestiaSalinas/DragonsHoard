@@ -2,7 +2,7 @@ package com.celestiasalinas.dragonshoard.core.registry.blocks;
 
 import com.celestiasalinas.dragonshoard.core.DragonsHoard;
 import com.celestiasalinas.dragonshoard.core.objects.ShinyBlock;
-import com.celestiasalinas.dragonshoard.core.registry.particles.ParticleRegistry;
+//import com.celestiasalinas.dragonshoard.core.registry.particles.ParticleRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Properties;
 import net.minecraft.block.material.Material;

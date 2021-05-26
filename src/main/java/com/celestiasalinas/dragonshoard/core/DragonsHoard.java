@@ -2,6 +2,7 @@ package com.celestiasalinas.dragonshoard.core;
 
 import com.celestiasalinas.dragonshoard.core.registry.blocks.DHBlocks;
 import com.celestiasalinas.dragonshoard.core.registry.items.DHItems;
+//import com.celestiasalinas.dragonshoard.core.registry.particles.ParticleRegistry;
 import com.celestiasalinas.dragonshoard.core.registry.particles.ParticleRegistry;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -46,17 +47,7 @@ public class DragonsHoard
 
         ParticleRegistry.PARTICLES.register(modEventBus);
 
-////        bus.addListener(this::doClientStuff);
-//        bus.addListener(this::doParticleStuff);
-//
-//        MinecraftForge.EVENT_BUS.register(this);
-//    }
-//    @SubscribeEvent
-//    public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
-//        DHBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
-//            event.getRegistry().register(new BlockItem(block, new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS))
-//                    .setRegistryName(block.getRegistryName()));
-//        });
+
     }
         @SubscribeEvent
         public static void createBlockItems(final RegistryEvent.Register<Item> event) {
