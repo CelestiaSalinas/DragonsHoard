@@ -1,5 +1,7 @@
 package com.celestiasalinas.dragonshoard.core;
 
+import com.celestiasalinas.dragonshoard.core.objects.Banners;
+import com.celestiasalinas.dragonshoard.core.registry.blocks.DHBanners;
 import com.celestiasalinas.dragonshoard.core.registry.blocks.DHBlocks;
 import com.celestiasalinas.dragonshoard.core.registry.items.DHItems;
 //import com.celestiasalinas.dragonshoard.core.registry.particles.ParticleRegistry;
@@ -46,6 +48,7 @@ public class DragonsHoard
         DHBlocks.BLOCKS.register(modEventBus);
 
         ParticleRegistry.PARTICLES.register(modEventBus);
+        //Banners.PAINTINGS.register(modEventBus);
 
 
     }
