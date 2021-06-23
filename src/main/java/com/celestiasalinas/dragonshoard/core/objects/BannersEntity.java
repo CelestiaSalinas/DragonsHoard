@@ -1,5 +1,6 @@
 package com.celestiasalinas.dragonshoard.core.objects;
 
+import com.celestiasalinas.dragonshoard.util.SSpawnBannerPacket;
 import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
@@ -7,12 +8,13 @@ import javax.annotation.Nullable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.item.HangingEntity;
+import net.minecraft.entity.item.PaintingEntity;
 import net.minecraft.entity.item.PaintingType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
-import net.minecraft.network.play.server.SSpawnPaintingPacket;
+
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
@@ -24,9 +26,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class BannersEntity extends HangingEntity {
-    public Banners motive;
+    public Banners banner;
 
-    public BannersEntity(EntityType<? extends BannersEntity> p_i50221_1_, World p_i50221_2_) {
+    public BannersEntity(EntityType<? extends PaintingEntity> p_i50221_1_, World p_i50221_2_) {
         super(p_i50221_1_, p_i50221_2_);
     }
 
@@ -36,7 +38,7 @@ public class BannersEntity extends HangingEntity {
         int i = 0;
 
         for(PaintingType paintingtype : Registry.MOTIVE) {
-            this.motive = (Banners) paintingtype;
+            this.banner = (Banners) paintingtype;
             this.setDirection(p_i45849_3_);
             if (this.survives()) {
                 list.add((Banners) paintingtype);
@@ -57,7 +59,7 @@ public class BannersEntity extends HangingEntity {
                 }
             }
 
-            this.motive = list.get(this.random.nextInt(list.size()));
+            this.banner = list.get(this.random.nextInt(list.size()));
         }
 
         this.setDirection(p_i45849_3_);
@@ -66,29 +68,29 @@ public class BannersEntity extends HangingEntity {
     @OnlyIn(Dist.CLIENT)
     public BannersEntity(World p_i48559_1_, BlockPos p_i48559_2_, Direction p_i48559_3_, Banners p_i48559_4_) {
         this(p_i48559_1_, p_i48559_2_, p_i48559_3_);
-        this.motive = p_i48559_4_;
+        this.banner = p_i48559_4_;
         this.setDirection(p_i48559_3_);
     }
 
     public void addAdditionalSaveData(CompoundNBT p_213281_1_) {
-        p_213281_1_.putString("Motive", Registry.MOTIVE.getKey(this.motive).toString());
+        p_213281_1_.putString("Motive", Registry.MOTIVE.getKey(this.banner).toString());
         p_213281_1_.putByte("Facing", (byte)this.direction.get2DDataValue());
         super.addAdditionalSaveData(p_213281_1_);
     }
 
     public void readAdditionalSaveData(CompoundNBT p_70037_1_) {
-        this.motive = (Banners) Registry.MOTIVE.get(ResourceLocation.tryParse(p_70037_1_.getString("Motive")));
+        this.banner = (Banners) Registry.MOTIVE.get(ResourceLocation.tryParse(p_70037_1_.getString("Motive")));
         this.direction = Direction.from2DDataValue(p_70037_1_.getByte("Facing"));
         super.readAdditionalSaveData(p_70037_1_);
         this.setDirection(this.direction);
     }
 
     public int getWidth() {
-        return this.motive == null ? 1 : this.motive.getWidth();
+        return this.banner == null ? 1 : this.banner.getWidth();
     }
 
     public int getHeight() {
-        return this.motive == null ? 1 : this.motive.getHeight();
+        return this.banner == null ? 1 : this.banner.getHeight();
     }
 
     public void dropItem(@Nullable Entity p_110128_1_) {
@@ -120,6 +122,6 @@ public class BannersEntity extends HangingEntity {
     }
 
     public IPacket<?> getAddEntityPacket() {
-        return new SSpawnPaintingPacket(this);
+        return new SSpawnBannerPacket(this);
     }
 }

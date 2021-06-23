@@ -48,7 +48,7 @@ public class DragonsHoard
         DHBlocks.BLOCKS.register(modEventBus);
 
         ParticleRegistry.PARTICLES.register(modEventBus);
-        //Banners.PAINTINGS.register(modEventBus);
+        DHBanners.PAINTINGS.register(modEventBus);
 
 
     }

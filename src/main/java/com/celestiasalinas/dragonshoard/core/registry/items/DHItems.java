@@ -1,6 +1,7 @@
 package com.celestiasalinas.dragonshoard.core.registry.items;
 
 import com.celestiasalinas.dragonshoard.core.DragonsHoard;
+import com.celestiasalinas.dragonshoard.util.BannerSpawn;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.fml.RegistryObject;
@@ -28,4 +29,6 @@ public class DHItems {
     public static final RegistryObject<Item> TANZANITE = ITEMS.register("tanzanite", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
     public static final RegistryObject<Item> TOPAZ = ITEMS.register("topaz", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
     public static final RegistryObject<Item> OPAL = ITEMS.register("opal", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
+    // spawn
+    //public static final RegistryObject<Item> BANNER = ITEMS.register("banner", () -> new BannerSpawn(new Item.Properties()));
 }
