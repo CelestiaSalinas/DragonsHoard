@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"facing=north": { "model": "dragonshoard:block/blue_shell" },
+		"facing=south": { "model": "dragonshoard:block/blue_shell", "y": 180 },
+		"facing=west":  { "model": "dragonshoard:block/blue_shell", "y": 270 },
+		"facing=east":  { "model": "dragonshoard:block/blue_shell", "y": 90 }
+	}
+}

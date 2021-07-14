@@ -1,7 +1,8 @@
 package com.celestiasalinas.dragonshoard.core.registry.items;
 
 import com.celestiasalinas.dragonshoard.core.DragonsHoard;
-import com.celestiasalinas.dragonshoard.util.BannerSpawn;
+import com.celestiasalinas.dragonshoard.core.registry.blocks.DHFluids;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.fml.RegistryObject;
@@ -29,6 +30,10 @@ public class DHItems {
     public static final RegistryObject<Item> TANZANITE = ITEMS.register("tanzanite", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
     public static final RegistryObject<Item> TOPAZ = ITEMS.register("topaz", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
     public static final RegistryObject<Item> OPAL = ITEMS.register("opal", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
-    // spawn
-    //public static final RegistryObject<Item> BANNER = ITEMS.register("banner", () -> new BannerSpawn(new Item.Properties()));
+
+    //fluids
+    public static final RegistryObject<Item> BLUE_LAVA_BUCKET =
+            ITEMS.register("blue_lava_bucket",
+                    () -> new BucketItem(DHFluids.BLUE_LAVA_FLUID::get,
+                            new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_MATERIALS)));
 }

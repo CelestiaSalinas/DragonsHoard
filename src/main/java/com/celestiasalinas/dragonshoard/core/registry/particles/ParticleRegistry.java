@@ -8,11 +8,13 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class ParticleRegistry {
-
         public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, DragonsHoard.MOD_ID);
 
+
         public static final RegistryObject<BasicParticleType> GLITTER = PARTICLES.register("glitter", () -> new BasicParticleType(true));
-    }
+
+
+}
 
 //    @SubscribeEvent
 //    public static void onParticleFactoryRegistry(final ParticleFactoryRegisterEvent event) {
