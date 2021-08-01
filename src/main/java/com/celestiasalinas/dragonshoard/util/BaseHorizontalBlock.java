@@ -43,8 +43,8 @@ public class BaseHorizontalBlock extends Block {
         return this.defaultBlockState().setValue(HORIZONTAL_FACING, context.getHorizontalDirection().getOpposite());
     }
 
-    //@Override
-    protected void fillStateContainer(Builder<Block, BlockState> builder) {
+    @Override
+    protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(HORIZONTAL_FACING);
     }

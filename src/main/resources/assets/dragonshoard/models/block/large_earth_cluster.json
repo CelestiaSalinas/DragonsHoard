@@ -1,0 +1,6 @@
+{
+  "parent": "dragonshoard:block/template_large_crystal",
+  "textures": {
+    "crystal": "dragonshoard:block/large_crystal_charge"
+  }
+}

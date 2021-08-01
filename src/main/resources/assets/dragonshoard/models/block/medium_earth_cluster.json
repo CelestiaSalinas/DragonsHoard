@@ -1,0 +1,6 @@
+{
+  "parent": "dragonshoard:block/template_medium_crystal",
+  "textures": {
+    "crystal": "dragonshoard:block/earth_charge"
+  }
+}

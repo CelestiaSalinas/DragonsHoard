@@ -29,7 +29,7 @@ public class DragonsHoard
     public static final String MOD_ID = "dragonshoard";
     // Directly reference a log4j logger.
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID.toUpperCase());
-    public static final ItemGroup DRAGONS_HOARD = new DragonsHoardItemGroup("Dragon's Hoard");
+    //public static final ItemGroup DRAGONS_HOARD = new DragonsHoardItemGroup("Dragon's Hoard");
 
 
     public DragonsHoard() {
@@ -66,16 +66,16 @@ public class DragonsHoard
             });
 
         }
-    public static class DragonsHoardItemGroup extends ItemGroup {
-
-        public DragonsHoardItemGroup(String name) {
-            super(name);
-        }
-
-        @Override
-        public ItemStack makeIcon() {
-            return null;
-        }
+//    public static class DragonsHoardItemGroup extends ItemGroup {
+//
+//        public DragonsHoardItemGroup(String name) {
+//            super(name);
+//        }
+//
+//        @Override
+//        public ItemStack makeIcon() {
+//            return null;
+//        }
 //
 //        //@Override
 //        public ItemStack createIcon() {
@@ -83,7 +83,5 @@ public class DragonsHoard
 //        }
 
     }
-
-}
 
 

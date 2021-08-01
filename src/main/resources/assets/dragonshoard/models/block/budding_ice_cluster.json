@@ -1,0 +1,9 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "side": "dragonshoard:block/ice_budding_block1",
+    "front": "dragonshoard:block/ice_budding_block2",
+    "top": "dragonshoard:block/ice_budding_block3",
+    "bottom": "dragonshoard:block/ice_budding_block2"
+  }
+}

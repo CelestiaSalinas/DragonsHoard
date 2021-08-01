@@ -1,0 +1,22 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "dragonshoard:block/alexandrite_button",
+		"particle": "dragonshoard:block/alexandrite_button"
+	},
+	"elements": [
+		{
+			"from": [-2, 9, 7],
+			"to": [2, 13, 9],
+			"rotation": {"angle": -45, "axis": "z", "origin": [0, 0, 0]},
+			"faces": {
+				"north": {"uv": [0, 4, 4, 8], "rotation": 90, "texture": "#0"},
+				"east": {"uv": [3, 0, 4, 4], "texture": "#0"},
+				"south": {"uv": [0, 0, 4, 4], "texture": "#0"},
+				"west": {"uv": [0, 0, 1, 4], "texture": "#0"},
+				"up": {"uv": [0, 0, 4, 1], "texture": "#0"},
+				"down": {"uv": [4, 0, 8, 1], "texture": "#0"}
+			}
+		}
+	]
+}

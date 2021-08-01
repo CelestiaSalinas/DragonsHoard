@@ -1,0 +1,6 @@
+{
+  "parent": "dragonshoard:block/diamond_gem_button",
+  "textures": {
+    "texture": "dragonshoard:block/alexandrite_button"
+  }
+}

@@ -13,6 +13,16 @@ public class ParticleRegistry {
 
         public static final RegistryObject<BasicParticleType> GLITTER = PARTICLES.register("glitter", () -> new BasicParticleType(true));
 
+        public static final RegistryObject<BasicParticleType> PURPLE_GLITTER = PARTICLES.register("purple_glitter", () -> new BasicParticleType(true));
+
+        public static final RegistryObject<BasicParticleType> BLUE_GLITTER = PARTICLES.register("blue_glitter", () -> new BasicParticleType(true));
+
+        public static final RegistryObject<BasicParticleType> ICE_GLITTER = PARTICLES.register("ice_glitter", () -> new BasicParticleType(true));
+
+        public static final RegistryObject<BasicParticleType> GREEN_GLITTER = PARTICLES.register("green_glitter", () -> new BasicParticleType(true));
+
+        public static final RegistryObject<BasicParticleType> ORANGE_GLITTER = PARTICLES.register("orange_glitter", () -> new BasicParticleType(true));
+
 
 }
 

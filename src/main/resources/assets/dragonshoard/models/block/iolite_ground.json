@@ -1,0 +1,6 @@
+{
+  "parent": "block/template_torch",
+  "textures": {
+    "torch": "dragonshoard:blocks/iolite_gem_placeable"
+  }
+}

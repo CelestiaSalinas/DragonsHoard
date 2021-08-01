@@ -1,0 +1,6 @@
+{
+"parent": "dragonshoard:block/template_crystal",
+"textures": {
+"crystal": "dragonshoard:block/test_charge"
+}
+}

@@ -1,8 +1,61 @@
 {
-	"variants": {
-		"facing=north": { "model": "dragonshoard:block/pink_shell" },
-		"facing=south": { "model": "dragonshoard:block/pink_shell", "y": 180 },
-		"facing=west":  { "model": "dragonshoard:block/pink_shell", "y": 270 },
-		"facing=east":  { "model": "dragonshoard:block/pink_shell", "y": 90 }
-	}
+"variants": {
+"face=ceiling,facing=east": {
+"model": "dragonshoard:block/pink_shell",
+"y": 270,
+"x": 180
+},
+"face=ceiling,facing=north": {
+"model": "dragonshoard:block/pink_shell",
+"y": 180,
+"x": 180
+},
+"face=ceiling,facing=south": {
+"model": "dragonshoard:block/pink_shell",
+"x": 180
+},
+"face=ceiling,facing=west": {
+"model": "dragonshoard:block/pink_shell",
+"y": 90,
+"x": 180
+},
+"face=floor,facing=east": {
+"model": "dragonshoard:block/pink_shell",
+"y": 90
+},
+"face=floor,facing=north": {
+"model": "dragonshoard:block/pink_shell"
+},
+"face=floor,facing=south": {
+"model": "dragonshoard:block/pink_shell",
+"y": 180
+},
+"face=floor,facing=west": {
+"model": "dragonshoard:block/pink_shell",
+"y": 270
+},
+"face=wall,facing=east": {
+"model": "dragonshoard:block/pink_shell",
+"y": 90,
+"x": 90,
+"uvlock": false
+},
+"face=wall,facing=north": {
+"model": "dragonshoard:block/pink_shell",
+"x": 90,
+"uvlock": false
+},
+"face=wall,facing=south": {
+"model": "dragonshoard:block/pink_shell",
+"y": 180,
+"x": 90,
+"uvlock": false
+},
+"face=wall,facing=west": {
+"model": "dragonshoard:block/pink_shell",
+"y": 270,
+"x": 90,
+"uvlock": false
+}
+}
 }

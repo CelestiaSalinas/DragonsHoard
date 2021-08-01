@@ -1,0 +1,6 @@
+{
+  "parent": "dragonshoard:block/square_gem_button",
+  "textures": {
+    "texture": "dragonshoard:block/ruby_button2"
+  }
+}

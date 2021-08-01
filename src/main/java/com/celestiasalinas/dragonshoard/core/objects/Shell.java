@@ -1,104 +1,147 @@
 package com.celestiasalinas.dragonshoard.core.objects;
 
 import com.celestiasalinas.dragonshoard.util.BaseHorizontalBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.AttachFace;
+import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
+import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 import java.util.stream.Stream;
 
-public class Shell extends BaseHorizontalBlock {
+public class Shell extends HorizontalFaceBlock implements IWaterLoggable {
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 
-    private static final VoxelShape SHAPE = Stream.of(
-            Block.box(11, 1, 8, 12, 2, 9),
-            Block.box(6, 0, 6, 10, 1, 11),
-            Block.box(6, 1, 6, 10, 2, 11),
-            Block.box(6, 0, 11, 10, 1, 12),
-            Block.box(5, 0, 5, 6, 1, 12),
-            Block.box(4, 0, 6, 5, 1, 11),
-            Block.box(10, 0, 6, 12, 1, 11),
-            Block.box(6, 0, 5, 10, 1, 6),
-            Block.box(6, 0, 4, 9, 1, 5),
-            Block.box(6, 0, 12, 9, 1, 13),
-            Block.box(5, 1, 7, 6, 2, 10),
-            Block.box(10, 1, 7, 11, 2, 10)
-    ).reduce((v1, v2) -> {return VoxelShapes.join(v1, v2, IBooleanFunction.OR);}).get();
+//    private static final VoxelShape SHAPE = Stream.of(
+//            Block.box(8, 1, 4, 9, 2, 5),
+//            Block.box(6, 0, 6, 11, 1, 10),
+//            Block.box(6, 1, 6, 11, 2, 10),
+//            Block.box(11, 0, 6, 12, 1, 10),
+//            Block.box(5, 0, 10, 12, 1, 11),
+//            Block.box(6, 0, 11, 11, 1, 12),
+//            Block.box(6, 0, 4, 11, 1, 6),
+//            Block.box(5, 0, 6, 6, 1, 10),
+//            Block.box(4, 0, 7, 5, 1, 10),
+//            Block.box(12, 0, 7, 13, 1, 10),
+//            Block.box(7, 1, 10, 10, 2, 11),
+//            Block.box(7, 1, 5, 10, 2, 6)
+//    ).reduce((v1, v2) -> {return VoxelShapes.join(v1, v2, IBooleanFunction.OR);}).get();
 
 
+    protected static final VoxelShape CEILING_AABB_X = Block.box(4, 15, 4, 13, 16, 13);
+    protected static final VoxelShape CEILING_AABB_Z = Block.box(4, 15, 4, 13, 16, 13);
+    protected static final VoxelShape FLOOR_AABB_X = Block.box(4, 0, 4, 13, 1, 13);
+    protected static final VoxelShape FLOOR_AABB_Z = Block.box(4, 0, 4, 13, 1, 13);
+    protected static final VoxelShape NORTH_AABB = Block.box(4, 4, 15, 13, 12, 16);
+    protected static final VoxelShape SOUTH_AABB = Block.box(3, 4, 0, 12, 12, 1);
+    protected static final VoxelShape WEST_AABB = Block.box(15, 4, 3, 16, 12, 12);
+    protected static final VoxelShape EAST_AABB = Block.box(0, 4, 4, 1, 12, 13);
 
+    public Shell (AbstractBlock.Properties p_i48436_2_) {
+        super(p_i48436_2_);
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(FACE, AttachFace.WALL).setValue(WATERLOGGED, Boolean.valueOf(false)));
 
-    public Shell(Properties properties) {
-        super(properties);
-        runCalculation(SHAPE);
     }
 
 
+    public BlockState updateShape(BlockState p_196271_1_, Direction p_196271_2_, BlockState p_196271_3_, IWorld p_196271_4_, BlockPos p_196271_5_, BlockPos p_196271_6_) {
+        if (p_196271_2_.getOpposite() == p_196271_1_.getValue(FACING) && !p_196271_1_.canSurvive(p_196271_4_, p_196271_5_)) {
+            return Blocks.AIR.defaultBlockState();
+        } else {
+            if (p_196271_1_.getValue(WATERLOGGED)) {
+                p_196271_4_.getLiquidTicks().scheduleTick(p_196271_5_, Fluids.WATER, Fluids.WATER.getTickDelay(p_196271_4_));
+            }
 
-    @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return SHAPES.get(this).get(state.getValue(HORIZONTAL_FACING));
+            return super.updateShape(p_196271_1_, p_196271_2_, p_196271_3_, p_196271_4_, p_196271_5_, p_196271_6_);
+        }
+    }
+
+    @Nullable
+    public BlockState getStateForPlacement(BlockItemUseContext p_196258_1_) {
+
+        BlockState blockstate;
+        IWorldReader iworldreader = p_196258_1_.getLevel();
+        BlockPos blockpos = p_196258_1_.getClickedPos();
+        FluidState fluidstate = p_196258_1_.getLevel().getFluidState(p_196258_1_.getClickedPos());
+        for(Direction direction : p_196258_1_.getNearestLookingDirections()) {
+
+            if (direction.getAxis() == Direction.Axis.Y) {
+                blockstate = this.defaultBlockState().setValue(FACE, direction == Direction.UP ? AttachFace.CEILING : AttachFace.FLOOR).setValue(FACING, p_196258_1_.getHorizontalDirection());
+            } else {
+                blockstate = this.defaultBlockState().setValue(FACE, AttachFace.WALL).setValue(FACING, direction.getOpposite());
+            }
+
+            if (blockstate.canSurvive(iworldreader, blockpos)) {
+                return blockstate.setValue(WATERLOGGED, Boolean.valueOf(fluidstate.getType() == Fluids.WATER));
+            }
+//                if (blockstate1.canSurvive(iworldreader, blockpos)) {
+//                    return blockstate1.setValue(WATERLOGGED, Boolean.valueOf(fluidstate.getType() == Fluids.WATER));
+        }
+
+
+        return null;
+    }
+
+    public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
+        Direction direction = p_220053_1_.getValue(FACING);
+        switch((AttachFace)p_220053_1_.getValue(FACE)) {
+            case FLOOR:
+                if (direction.getAxis() == Direction.Axis.X) {
+                    return FLOOR_AABB_X;
+                }
+
+                return FLOOR_AABB_Z;
+            case WALL:
+                switch(direction) {
+                    case EAST:
+                        return EAST_AABB;
+                    case WEST:
+                        return WEST_AABB;
+                    case SOUTH:
+                        return SOUTH_AABB;
+                    case NORTH:
+                    default:
+                        return NORTH_AABB;
+                }
+            case CEILING:
+            default:
+                if (direction.getAxis() == Direction.Axis.X) {
+                    return CEILING_AABB_X;
+                } else {
+                    return CEILING_AABB_Z;
+                }
+        }
+    }
+
+
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> p_206840_1_) {
+        p_206840_1_.add(FACING, FACE, WATERLOGGED);
+    }
+
+    public FluidState getFluidState(BlockState p_204507_1_) {
+        return p_204507_1_.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(p_204507_1_);
     }
 }
-
-
-//public static final DirectionProperty FACING = HorizontalBlock.FACING;
-//public static final EnumProperty<ShellAttachment> ATTACHMENT = BlockStateProperties.BELL_ATTACHMENT;
-
-//    private static final Vector3d SHAPE1_1 = new Vector3d(7, 0, 4);
-//    private static final Vector3d SHAPE1_2 = new Vector3d(11, 1, 9);
-//    //
-//    private static final Vector3d SHAPE2_1 = new Vector3d(7, 1, 4);
-//    private static final Vector3d SHAPE2_2 = new Vector3d(11, 2, 9);
-//    //
-//    private static final Vector3d SHAPE3_1 = new Vector3d(7, 0, 9);
-//    private static final Vector3d SHAPE3_2 = new Vector3d(11, 1, 10);
-//    //
-//    private static final Vector3d SHAPE4_1 = new Vector3d(6, 0, 3);
-//    private static final Vector3d SHAPE4_2 = new Vector3d(7, 1, 10);
-//    //
-//    private static final Vector3d SHAPE5_1 = new Vector3d(5, 0, 4);
-//    private static final Vector3d SHAPE5_2 = new Vector3d(6, 1, 9);
-//    //
-//    private static final Vector3d SHAPE6_1 = new Vector3d(11, 0, 4);
-//    private static final Vector3d SHAPE6_2 = new Vector3d(13, 1, 9);
-//    //
-//    private static final Vector3d SHAPE7_1 = new Vector3d(7, 0, 3);
-//    private static final Vector3d SHAPE7_2 = new Vector3d(11, 1, 4);
-//    //
-//    private static final Vector3d SHAPE8_1 = new Vector3d(9, 0, 2);
-//    private static final Vector3d SHAPE8_2 = new Vector3d(10, 1, 3);
-//    //
-//    private static final Vector3d SHAPE9_1 = new Vector3d(7, 0, 10);
-//    private static final Vector3d SHAPE9_2 = new Vector3d(10, 1, 11);
-//    //
-//    private static final Vector3d SHAPE10_1 = new Vector3d(6, 1, 5);
-//    private static final Vector3d SHAPE10_2 = new Vector3d(7, 2, 8);
-//    //
-//    private static final Vector3d SHAPE11_1 = new Vector3d(11, 1, 5);
-//    private static final Vector3d SHAPE11_2 = new Vector3d(12, 2, 8);
-//    //
-//    private static final Vector3d SHAPE12_1 = new Vector3d(12, 1, 6);
-//    private static final Vector3d SHAPE12_2 = new Vector3d(13, 2, 7);
-//
-//    private static final VoxelShape SHAPE1 = Block.box(SHAPE1_1.x, SHAPE1_1.y, SHAPE1_1.z(), SHAPE1_2.x(), SHAPE1_2.y(), SHAPE1_2.z());
-//    private static final VoxelShape SHAPE2 = Block.box(SHAPE2_1.x, SHAPE2_1.y, SHAPE2_1.z(), SHAPE2_2.x(), SHAPE2_2.y(), SHAPE2_2.z());
-//    private static final VoxelShape SHAPE3 = Block.box(SHAPE3_1.x, SHAPE3_1.y, SHAPE3_1.z(), SHAPE3_2.x(), SHAPE3_2.y(), SHAPE3_2.z());
-//    private static final VoxelShape SHAPE4 = Block.box(SHAPE4_1.x, SHAPE4_1.y, SHAPE4_1.z(), SHAPE4_2.x(), SHAPE4_2.y(), SHAPE4_2.z());
-//    private static final VoxelShape SHAPE5 = Block.box(SHAPE5_1.x, SHAPE5_1.y, SHAPE5_1.z(), SHAPE5_2.x(), SHAPE5_2.y(), SHAPE5_2.z());
-//    private static final VoxelShape SHAPE6 = Block.box(SHAPE6_1.x, SHAPE6_1.y, SHAPE6_1.z(), SHAPE6_2.x(), SHAPE6_2.y(), SHAPE6_2.z());
-//    private static final VoxelShape SHAPE7 = Block.box(SHAPE7_1.x, SHAPE7_1.y, SHAPE7_1.z(), SHAPE7_2.x(), SHAPE7_2.y(), SHAPE7_2.z());
-//    private static final VoxelShape SHAPE8 = Block.box(SHAPE8_1.x, SHAPE8_1.y, SHAPE8_1.z(), SHAPE8_2.x(), SHAPE8_2.y(), SHAPE8_2.z());
-//    private static final VoxelShape SHAPE9 = Block.box(SHAPE9_1.x, SHAPE9_1.y, SHAPE9_1.z(), SHAPE9_2.x(), SHAPE9_2.y(), SHAPE9_2.z());
-//    private static final VoxelShape SHAPE10 = Block.box(SHAPE10_1.x, SHAPE10_1.y, SHAPE10_1.z(), SHAPE10_2.x(), SHAPE10_2.y(), SHAPE10_2.z());
-//    private static final VoxelShape SHAPE11 = Block.box(SHAPE11_1.x, SHAPE11_1.y, SHAPE11_1.z(), SHAPE11_2.x(), SHAPE11_2.y(), SHAPE11_2.z());
-//    private static final VoxelShape SHAPE12 = Block.box(SHAPE12_1.x, SHAPE12_1.y, SHAPE12_1.z(), SHAPE12_2.x(), SHAPE12_2.y(), SHAPE12_2.z());
-//private static VoxelShape COMBINED_SHAPE = VoxelShapes.or(SHAPE1, SHAPE2, SHAPE3, SHAPE4, SHAPE5, SHAPE6, SHAPE7, SHAPE8, SHAPE9, SHAPE10, SHAPE11, SHAPE12);
-
-//private static VoxelShape EMPTY_SPACE = VoxelShapes.join(VoxelShapes.block(), COMBINED_SHAPE, IBooleanFunction.ONLY_FIRST);

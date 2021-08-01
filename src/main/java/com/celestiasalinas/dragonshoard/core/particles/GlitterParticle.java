@@ -26,7 +26,7 @@ public class GlitterParticle extends SpriteTexturedParticle {
         this.xd *= -0.1f;
         this.yd *= -0.1f;
         this.zd *= -0.1f;
-        this.lifetime = (int) (30.0D / (Math.random() * 1.0D));
+        this.lifetime = (int) (20.0D / (Math.random() * 1.0D));
 
     }
 

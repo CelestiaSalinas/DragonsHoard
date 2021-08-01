@@ -1,0 +1,6 @@
+{
+  "parent": "dragonshoard:block/diamond_gem_button_pressed",
+  "textures": {
+    "texture": "dragonshoard:block/rose_quartz_button"
+  }
+}

@@ -1,0 +1,6 @@
+{
+	"parent": "dragonshoard:block/template_wall_shell",
+	"textures": {
+		"torch": "dragonshoard:block/pink_wall_shell"
+	}
+}
